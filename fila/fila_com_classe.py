@@ -1,7 +1,8 @@
 from collections import deque
 
 '''
-
+Criando uma classe para manipular 
+melhor os metodos de minha fila.
 '''
 
 
