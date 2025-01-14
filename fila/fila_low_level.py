@@ -1,3 +1,8 @@
+'''
+Criando nossa propria classe para
+se comportar como uma fila.
+'''
+
 from __future__ import annotations
 from typing import Any
 
