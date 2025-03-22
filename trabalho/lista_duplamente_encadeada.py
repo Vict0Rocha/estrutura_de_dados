@@ -98,13 +98,14 @@ class ListaDuplamenteEncadeada:
             atual = atual.proximo
 
 
-# Exemplo de uso
-corretor_imoveis = ListaDuplamenteEncadeada()
-corretor_imoveis.inserir_inicio(1, "Rua A, 123", "Victor Cordeiro", 1500)
-corretor_imoveis.inserir_fim(2, "Av. B, 456", "Henrique", 2000)
-corretor_imoveis.inserir_inicio(3, "Rua C, 789", "Leonardo", 1800)
-corretor_imoveis.listar_imoveis()
-corretor_imoveis.buscar(2)
-corretor_imoveis.remover_inicio()
-corretor_imoveis.remover_fim()
-corretor_imoveis.listar_imoveis()
+if __name__ == "__main__":
+    # Exemplo de uso
+    corretor_imoveis = ListaDuplamenteEncadeada()
+    corretor_imoveis.inserir_inicio(1, "Rua A, 123", "Victor Cordeiro", 1500)
+    corretor_imoveis.inserir_fim(2, "Av. B, 456", "Henrique", 2000)
+    corretor_imoveis.inserir_inicio(3, "Rua C, 789", "Leonardo", 1800)
+    corretor_imoveis.listar_imoveis()
+    corretor_imoveis.buscar(2)
+    corretor_imoveis.remover_inicio()
+    corretor_imoveis.remover_fim()
+    corretor_imoveis.listar_imoveis()
