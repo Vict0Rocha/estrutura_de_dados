@@ -89,7 +89,7 @@ class Playlist:
             print("Nenhuma música na playlist.")
             return
         atual = self.cabeca
-        print("Playlist:")
+        print("Playlist.")
         while atual:
             print(
                 f"ID: {atual.id}, Título: {atual.titulo}, Artista: {atual.artista}")
@@ -102,8 +102,12 @@ if __name__ == "__main__":
     playlist.inserir_inicio(1, "Dias de Luta, Dias de Gloria", "Charlie Brown")
     playlist.inserir_fim(2, "Flores em vida", "Zezé Di Camargo & Luciano")
     playlist.inserir_inicio(3, "Back in Back", "AC/DC")
+    print(70*'-')
     playlist.listar_musicas()
+    print(70*'-')
     playlist.buscar(2)
+    print(70*'-')
     playlist.remover_inicio()
     playlist.remover_fim()
+    print(70*'-')
     playlist.listar_musicas()
