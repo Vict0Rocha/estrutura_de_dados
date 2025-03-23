@@ -1,111 +1,109 @@
 from typing import Optional
 
 
-class Imovel:
+class Musica:
     """
-    Classe que representa um imóvel na imobiliária.
+    Classe que representa uma música em uma playlist.
     """
 
-    def __init__(self, id: int, endereco: str, proprietario: str, preco: float):
-        self.id = id  # Identificador único do imóvel
-        self.endereco = endereco  # Endereço do imóvel
-        self.proprietario = proprietario  # Nome do proprietário
-        self.preco = preco  # Valor do aluguel do imóvel
-        # Ponteiro para o imóvel anterior na lista
-        self.anterior: Optional[Imovel] = None
-        # Ponteiro para o próximo imóvel na lista
-        self.proximo: Optional[Imovel] = None
+    def __init__(self, id: int, titulo: str, artista: str):
+        self.id = id  # Identificador único da música
+        self.titulo = titulo  # Título da música
+        self.artista = artista  # Nome do artista
+        # Ponteiro para a música anterior na lista
+        self.anterior: Optional[Musica] = None
+        # Ponteiro para a próxima música na lista
+        self.proximo: Optional[Musica] = None
 
 
-class ListaDuplamenteEncadeada:
+class Playlist:
     """
-    Implementação de uma Lista Duplamente Encadeada para armazenar imóveis.
-    Permite inserção e remoção em ambas as extremidades.
+    Lista Duplamente Encadeada para armazenar músicas.
     """
 
     def __init__(self):
-        self.cabeca: Optional[Imovel] = None  # Primeiro elemento da lista
-        self.cauda: Optional[Imovel] = None  # Último elemento da lista
+        self.cabeca: Optional[Musica] = None  # Primeira música da playlist
+        self.cauda: Optional[Musica] = None  # Última música da playlist
 
-    def inserir_inicio(self, id: int, endereco: str, proprietario: str, preco: float):
-        """Insere um novo imóvel no início da lista."""
-        novo_imovel = Imovel(id, endereco, proprietario, preco)
-        if not self.cabeca:  # Se a lista estiver vazia, o novo imóvel será o único elemento
-            self.cabeca = self.cauda = novo_imovel
+    def inserir_inicio(self, id: int, titulo: str, artista: str):
+        """Insere uma nova música no início da playlist."""
+        nova_musica = Musica(id, titulo, artista)
+        if not self.cabeca:  # Se a playlist estiver vazia, a nova música será a única
+            self.cabeca = self.cauda = nova_musica
         else:
-            novo_imovel.proximo = self.cabeca  # O novo imóvel aponta para a antiga cabeça
-            self.cabeca.anterior = novo_imovel  # A antiga cabeça aponta para o novo imóvel
-            self.cabeca = novo_imovel  # Atualiza a cabeça da lista
-        print(f"Imóvel {id} inserido no início.")
+            nova_musica.proximo = self.cabeca  # A nova música aponta para a antiga cabeça
+            self.cabeca.anterior = nova_musica  # A antiga cabeça aponta para a nova música
+            self.cabeca = nova_musica  # Atualiza a cabeça da playlist
+        print(f"Música: {titulo} adicionada ao início da playlist.")
 
-    def inserir_fim(self, id: int, endereco: str, proprietario: str, preco: float):
-        """Insere um novo imóvel no final da lista."""
-        novo_imovel = Imovel(id, endereco, proprietario, preco)
-        if not self.cauda:  # Se a lista estiver vazia, o novo imóvel será o único elemento
-            self.cabeca = self.cauda = novo_imovel
+    def inserir_fim(self, id: int, titulo: str, artista: str):
+        """Insere uma nova música no final da playlist."""
+        nova_musica = Musica(id, titulo, artista)
+        if not self.cauda:  # Se a playlist estiver vazia, a nova música será a única
+            self.cabeca = self.cauda = nova_musica
         else:
-            self.cauda.proximo = novo_imovel  # O último imóvel aponta para o novo imóvel
-            novo_imovel.anterior = self.cauda  # O novo imóvel aponta para o antigo último
-            self.cauda = novo_imovel  # Atualiza a cauda da lista
-        print(f"Imóvel {id} inserido no final.")
+            self.cauda.proximo = nova_musica  # A última música aponta para a nova música
+            nova_musica.anterior = self.cauda  # A nova música aponta para a antiga última
+            self.cauda = nova_musica  # Atualiza a cauda da playlist
+        print(f"Música: {titulo} adicionada ao final da playlist.")
 
     def remover_inicio(self):
-        """Remove o primeiro imóvel da lista."""
+        """Remove a primeira música da playlist."""
         if not self.cabeca:
-            print("Lista vazia, nada para remover.")
+            print("A playlist está vazia, nada para remover.")
             return
-        print(f"Imóvel {self.cabeca.id} removido do início.")
-        self.cabeca = self.cabeca.proximo  # Atualiza a cabeça para o próximo imóvel
+        print(f"Música: {self.cabeca.titulo} removida do início da playlist.")
+        self.cabeca = self.cabeca.proximo  # Atualiza a cabeça para a próxima música
         if self.cabeca:
-            self.cabeca.anterior = None  # Remove a referência para o antigo primeiro imóvel
+            self.cabeca.anterior = None  # Remove a referência para a antiga primeira música
         else:
-            self.cauda = None  # Se a lista ficar vazia, a cauda também é atualizada
+            self.cauda = None  # Se a playlist ficar vazia, a cauda também é atualizada
 
     def remover_fim(self):
-        """Remove o último imóvel da lista."""
+        """Remove a última música da playlist."""
         if not self.cauda:
-            print("Lista vazia, nada para remover.")
+            print("A playlist está vazia, nada para remover.")
             return
-        print(f"Imóvel {self.cauda.id} removido do final.")
-        self.cauda = self.cauda.anterior  # Atualiza a cauda para o penúltimo imóvel
+        print(f"Música: {self.cauda.titulo} removida do final da playlist.")
+        self.cauda = self.cauda.anterior  # Atualiza a cauda para a penúltima música
         if self.cauda:
-            self.cauda.proximo = None  # Remove a referência para o antigo último imóvel
+            self.cauda.proximo = None  # Remove a referência para a antiga última música
         else:
-            self.cabeca = None  # Se a lista ficar vazia, a cabeça também é atualizada
+            self.cabeca = None  # Se a playlist ficar vazia, a cabeça também é atualizada
 
     def buscar(self, id: int):
-        """Busca um imóvel pelo ID na lista."""
+        """Busca uma música pelo ID na playlist."""
         atual = self.cabeca
         while atual:
             if atual.id == id:
                 print(
-                    f"Imóvel encontrado: {atual.endereco}, Proprietário: {atual.proprietario}, Aluguel: R${atual.preco}")
+                    f"Música encontrada: {atual.titulo}, Artista: {atual.artista}")
                 return atual
             atual = atual.proximo
-        print("Imóvel não encontrado.")
+        print("Música não encontrada.")
         return None
 
-    def listar_imoveis(self):
-        """Exibe todos os imóveis cadastrados na lista."""
+    def listar_musicas(self):
+        """Exibe todas as músicas cadastradas na playlist."""
         if not self.cabeca:
-            print("Nenhum imóvel cadastrado.")
+            print("Nenhuma música na playlist.")
             return
         atual = self.cabeca
-        print("Lista de imóveis cadastrados:")
+        print("Playlist:")
         while atual:
             print(
-                f"ID: {atual.id}, Endereço: {atual.endereco}, Proprietário: {atual.proprietario}, Aluguel: R${atual.preco}")
+                f"ID: {atual.id}, Título: {atual.titulo}, Artista: {atual.artista}")
             atual = atual.proximo
 
 
 if __name__ == "__main__":
     # Exemplo de uso
-    corretor_imoveis = ListaDuplamenteEncadeada()
-    corretor_imoveis.inserir_inicio(1, "Rua A, 123", "Victor Cordeiro", 1500)
-    corretor_imoveis.inserir_fim(2, "Av. B, 456", "Henrique", 2000)
-    corretor_imoveis.inserir_inicio(3, "Rua C, 789", "Leonardo", 1800)
-    corretor_imoveis.listar_imoveis()
-    corretor_imoveis.buscar(2)
-    corretor_imoveis.remover_inicio()
-    corretor_imoveis.remover_fim()
-    corretor_imoveis.listar_imoveis()
+    playlist = Playlist()
+    playlist.inserir_inicio(1, "Dias de Luta, Dias de Gloria", "Charlie Brown")
+    playlist.inserir_fim(2, "Flores em vida", "Zezé Di Camargo & Luciano")
+    playlist.inserir_inicio(3, "Back in Back", "AC/DC")
+    playlist.listar_musicas()
+    playlist.buscar(2)
+    playlist.remover_inicio()
+    playlist.remover_fim()
+    playlist.listar_musicas()
