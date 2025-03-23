@@ -17,7 +17,7 @@ class Imovel:
 
 class ListaSimplesmenteEncadeada:
     """
-    Implementação de uma Lista Simplesmente Encadeada para armazenar imóveis.
+    Lista Simplesmente Encadeada para armazenar imóveis.
     """
 
     def __init__(self):
@@ -75,9 +75,13 @@ if __name__ == "__main__":
     # Exemplo de uso
     corretor_imoveis = ListaSimplesmenteEncadeada()
     corretor_imoveis.inserir(1, "Rua A, 123", "Victor Cordeiro", 3500)
-    corretor_imoveis.inserir(2, "Av. B, 456", "Leticia", 2000)
+    corretor_imoveis.inserir(2, "Av. B, 456", "Raul", 2000)
     corretor_imoveis.inserir(3, "Rua C, 789", "Luiz Oliveira", 1800)
+    print(80*'-')
     corretor_imoveis.listar_imoveis()
+    print(80*'-')
     corretor_imoveis.buscar(2)
+    print(80*'-')
     corretor_imoveis.remover(2)
+    print(80*'-')
     corretor_imoveis.listar_imoveis()
