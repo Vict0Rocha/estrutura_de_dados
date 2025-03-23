@@ -1,73 +1,48 @@
-from typing import Optional
-
-
-class Imovel:
+class CallStack:
     """
-    Classe que representa um imóvel na imobiliária.
-    """
-
-    def __init__(self, id: int, endereco: str, proprietario: str, preco: float):
-        self.id = id  # Identificador único do imóvel
-        self.endereco = endereco  # Endereço do imóvel
-        self.proprietario = proprietario  # Nome do proprietário
-        self.preco = preco  # Valor do aluguel do imóvel
-        # Ponteiro para o próximo imóvel na pilha
-        self.proximo: Optional[Imovel] = None
-
-
-class Pilha:
-    """
-    Implementação de uma Pilha (LIFO - Last In, First Out) para armazenar imóveis.
+    Simulação de uma Call Stack (pilha de chamadas).
     """
 
     def __init__(self):
-        # Último imóvel inserido (topo da pilha)
-        self.topo: Optional[Imovel] = None
+        self.pilha = []  # Pilha de chamadas
 
-    def empilhar(self, id: int, endereco: str, proprietario: str, preco: float):
-        """Adiciona um novo imóvel no topo da pilha."""
-        novo_imovel = Imovel(id, endereco, proprietario, preco)
-        novo_imovel.proximo = self.topo  # O novo imóvel aponta para o antigo topo
-        self.topo = novo_imovel  # Atualiza o topo da pilha
-        print(f"Imóvel {id} empilhado.")
+    def chamar_funcao(self, funcao: str):
+        """Empilha uma nova função na call stack."""
+        self.pilha.append(funcao)
+        print(f"Chamando função: {funcao}")
 
-    def desempilhar(self):
-        """Remove o imóvel do topo da pilha."""
-        if not self.topo:
-            print("A pilha está vazia, nada para desempilhar.")
+    def retornar_funcao(self):
+        """Desempilha a função do topo da call stack, simulando um retorno."""
+        if not self.pilha:
+            print("Nenhuma função em execução.")
             return
-        print(f"Imóvel {self.topo.id} desempilhado.")
-        self.topo = self.topo.proximo  # O novo topo será o próximo imóvel na pilha
+        funcao = self.pilha.pop()
+        print(f"Retornando da função: {funcao}")
 
-    def buscar_topo(self):
-        """Retorna o imóvel no topo da pilha sem removê-lo."""
-        if not self.topo:
-            print("A pilha está vazia.")
-            return None
-        print(
-            f"Topo da pilha: {self.topo.endereco}, Proprietário: {self.topo.proprietario}, Aluguel: R${self.topo.preco}")
-        return self.topo
-
-    def listar_imoveis(self):
-        """Exibe todos os imóveis da pilha."""
-        if not self.topo:
-            print("A pilha está vazia.")
-            return
-        atual = self.topo
-        print("Imóveis na pilha:")
-        while atual:
-            print(
-                f"ID: {atual.id}, Endereço: {atual.endereco}, Proprietário: {atual.proprietario}, Aluguel: R${atual.preco}")
-            atual = atual.proximo
+    def exibir_pilha(self):
+        """Exibe o estado atual da call stack."""
+        if not self.pilha:
+            print("Call Stack vazia.")
+        else:
+            print("Estado atual da Call Stack.")
+            for funcao in reversed(self.pilha):
+                print(f" -> {funcao}")
 
 
 if __name__ == "__main__":
-    # Exemplo de uso
-    corretor_imoveis = Pilha()
-    corretor_imoveis.empilhar(1, "Rua A, 123", "Vitão", 1500)
-    corretor_imoveis.empilhar(2, "Av. B, 456", "Raul", 2000)
-    corretor_imoveis.empilhar(3, "Rua C, 789", "Jeferson", 1800)
-    corretor_imoveis.listar_imoveis()
-    corretor_imoveis.buscar_topo()
-    corretor_imoveis.desempilhar()
-    corretor_imoveis.listar_imoveis()
+    # Simulando chamadas de funções
+    call_stack = CallStack()
+    call_stack.chamar_funcao("main")
+    call_stack.chamar_funcao("processar_dados")
+    call_stack.chamar_funcao("calcular_resultado")
+    print(45*'-')
+    call_stack.exibir_pilha()
+    print(45*'-')
+    call_stack.retornar_funcao()
+    print(45*'-')
+    call_stack.exibir_pilha()
+    print(45*'-')
+    call_stack.retornar_funcao()
+    call_stack.retornar_funcao()
+    print(45*'-')
+    call_stack.exibir_pilha()
