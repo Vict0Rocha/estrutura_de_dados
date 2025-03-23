@@ -1,3 +1,8 @@
+""""
+Estrutura de uma empresa com departamentos e funcionários.
+"""
+
+
 class No:
     """
     Representa um nó em uma árvore .
